@@ -1,13 +1,12 @@
 <?php
 
-use admin\Controllers\MenuController;
+use admin\Controllers\CategoryController;
 
 
-$controller = new MenuController($_REQUEST);
+$controller = new CategoryController($_REQUEST);
 
 $sideMenu = loadTemplate(COMPONENTS_PATH_ADMIN . 'sidebar-li.php', $props);
 $content = $sideMenu . $controller->index();
-
 
 // Set props for layout
 $props = [
@@ -15,4 +14,3 @@ $props = [
     'content' => $content,
     'layoutStyle' => 'sidebar',
 ];
-

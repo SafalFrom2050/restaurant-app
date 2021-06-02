@@ -2,6 +2,10 @@
     <ul>
 
         <?php
+        if (!isset($sideBarOptions)) {
+            echo '<h3 style="color: #ff5050">Oops! Here should be list of options.</h3>';
+            $sideBarOptions = [];
+        }
         foreach ($sideBarOptions as $option) {
             // <li><a href="menu.php">Menu</a></li>
 

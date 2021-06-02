@@ -9,18 +9,7 @@ class MenuController {
     public $request;
     public $view;
 
-    private $props = [
-        'sideBarOptions' => [
-            '0' => [
-                'title' => 'Menu',
-                'link' => 'admin?navigate=menu',
-            ],
-            '1' => [
-                'title' => 'Categories',
-                'link' => 'admin?navigate=categories',
-            ],
-        ],
-    ];
+    private $props;
 
     public function __construct($request)
     {

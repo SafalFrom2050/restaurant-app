@@ -2,8 +2,21 @@
 
 use admin\Controllers\AdminController;
 
+$props = [
+    'sideBarOptions' => [
+        '0' => [
+            'title' => 'Menu',
+            'link' => 'admin?navigate=menu',
+        ],
+        '1' => [
+            'title' => 'Categories',
+            'link' => 'admin?navigate=categories',
+        ],
+    ],
+];
+
 if (isset($_GET['navigate'])) {
-    require ROUTES_PATH_ADMIN.$_GET['navigate'].'.php';
+    require_once ROUTES_PATH_ADMIN.$_GET['navigate'].'.php';
 }else{
     $controller = new AdminController($_REQUEST);
 
