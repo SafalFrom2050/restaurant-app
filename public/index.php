@@ -15,6 +15,7 @@ const LAYOUTS_PATH_ADMIN = ROOT_PATH . 'views/admin/layouts/';
 const TEMPLATES_PATH_ADMIN = ROOT_PATH . 'views/admin/templates/';
 
 const ROUTES_PATH = ROOT_PATH . 'routes/';
+const ROUTES_PATH_ADMIN = ROOT_PATH . 'routes/admin/';
 
 const CLASSES_PATH = ROOT_PATH . 'classes/';
 const CONTROLLERS_PATH = ROOT_PATH . 'classes/Controllers/';

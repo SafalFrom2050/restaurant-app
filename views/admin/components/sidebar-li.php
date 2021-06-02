@@ -1,8 +1,14 @@
-<?php
+<section class="left">
+    <ul>
 
-foreach ($sideBarOptions as $option) {
-    // <li><a href="menu.php">Menu</a></li>
+        <?php
+        foreach ($sideBarOptions as $option) {
+            // <li><a href="menu.php">Menu</a></li>
 
 
-    echo '<li><a href="/'.$option['link'].'">'.$option['title'].'</a></li>';
-}
+            echo '<li><a href="/'.$option['link'].'">'.$option['title'].'</a></li>';
+        }
+        ?>
+
+    </ul>
+</section>

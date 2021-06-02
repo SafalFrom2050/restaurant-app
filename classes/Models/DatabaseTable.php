@@ -19,6 +19,8 @@ class DatabaseTable {
         $query = 'INSERT INTO ' . $this->table . ' (' . $values . ') VALUES (:' . $valuesWithColon . ')';
         $stmt = $this->pdo->prepare($query);
         $stmt->execute($record);
+
+        return $stmt->fetch();
     }
 
     public function find($field, $value) {

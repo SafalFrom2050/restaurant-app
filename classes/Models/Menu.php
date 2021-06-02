@@ -28,7 +28,8 @@ class Menu {
     public static function with($pdo, $array)
     {
         $menu = new Menu($pdo);
-        $menu->id = $array['id'];
+        isset($array['id']) ? $menu->id = $array['id'] : 0;
+
         $menu->categoryId = $array['category_id'];
         $menu->categorySlug = $array['category_slug'];
         $menu->name = $array['name'];
@@ -38,10 +39,26 @@ class Menu {
         return $menu;
     }
 
+
+    /** Database operations:  */
+
+    public function save()
+    {
+        $stmp = $this->table->insert($this);
+        return $stmp->fetch();
+    }
+
+
     public function findAllFoods()
     {
         $stmt = $this->table->findAll();
-        return self::with($this->pdo, $stmt);
+
+        $records = [];
+        foreach ($stmt as $record) {
+            $record = Menu::with(getPDO(), $record);
+            $records[] = $record;
+        }
+        return $records;
     }
 
     public function findFoodsWithCategoryId($categorySlug)

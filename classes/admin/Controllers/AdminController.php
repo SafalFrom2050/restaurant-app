@@ -54,8 +54,7 @@ class AdminController {
 
     private function getPage()
     {
-        if (isset($this->request['navigate']) )
-        {
+        if (isset($this->request['navigate'])) {
             $page = $this->request['navigate'].'-template.php';
 
 
