@@ -26,6 +26,14 @@ class AppController {
         if (isset($this->request['page'])) {
             // Removes extra '/' from requested page if any
             $requestPage = trim($this->request['page'], '/');
+
+            /** Don't allow users visit nested paths directly.
+             *
+             * For: v.je/admin/categories @param $requestPage = 'admin'
+             * instead of 'admin/categories'.
+             */
+
+            $requestPage = explode('/', $requestPage)[0];
             $view = ROUTES_PATH.$requestPage.'.php';
         }else {
             $view = ROUTES_PATH.'home.php';

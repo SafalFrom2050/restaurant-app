@@ -34,7 +34,7 @@ class CategoryController {
         $page = $this->request['page'];
 
         $menu = new Menu(getPDO());
-        $menuList = $menu->findFoodsWithCategoryId($page);
+        $menuList = $menu->findFoodsWithCategorySlug($page);
 
         $this->category = Category::create(getPDO())->find($page);
 

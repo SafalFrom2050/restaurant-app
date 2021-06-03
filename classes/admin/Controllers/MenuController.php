@@ -3,6 +3,7 @@
 namespace admin\Controllers;
 
 
+use admin\Services\MenuService;
 use Models\Menu;
 
 class MenuController {
@@ -24,10 +25,9 @@ class MenuController {
 
     private function handleRequest()
     {
-        if (isset($_REQUEST['record'])) {
-            $menu = Menu::with(getPDO(), $_REQUEST);
 
-            $menu->save();  // TODO: Error handling (method returns boolean as operation status)
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            MenuService::create(getPDO())->performAction($this->request);
         }
 
         $menuList = Menu::create(getPDO())->findAllFoods();

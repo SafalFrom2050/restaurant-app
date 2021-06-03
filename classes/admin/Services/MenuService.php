@@ -3,9 +3,9 @@
 namespace admin\Services;
 
 
-use Models\Category;
+use Models\Menu;
 
-class CategoryService {
+class MenuService {
 
     public $pdo;
 
@@ -16,23 +16,22 @@ class CategoryService {
 
     public static function create($pdo)
     {
-        return new CategoryService($pdo);
+        return new MenuService($pdo);
     }
 
     public function performAction($request)
     {
-
-        // Workaround for unsupported HTTP methods
         if (!isset($request['_method'])) {
             return;
         }
+
         $method = strtolower($request['_method']);
 
-        /** Create category */
+        /** Create menu */
 
         if ($method === 'post') {
-            $category = Category::with(getPDO(), $request);
-            $category->save();
+            $menu = Menu::with(getPDO(), $request);
+            $menu->save();
         }
 
         /** Operations on existing rows */
@@ -42,13 +41,11 @@ class CategoryService {
         }
 
         if ($method === 'delete') {
-            $category = Category::create($this->pdo);
-            $category->delete($request['id']);
+            $menu = Menu::create($this->pdo);
+            $menu->delete($request['id']);
         }else if ($method === 'put') {
-            $category = Category::with(getPDO(), $request);
-            $category->update();
-        }else if ($method === 'patch') {
-            // TODO: patch logic
+            $menu = Menu::create(getPDO())->findById($request['id']);
+            $menu->update($request);
         }
     }
 }

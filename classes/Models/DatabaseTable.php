@@ -43,7 +43,7 @@ class DatabaseTable {
             'value' => $value
         ];
         $stmt->execute($criteria);
-        return $stmt->fetch();
+        return $stmt->rowCount();
     }
 
     public function update($record, $primaryKey) {
@@ -57,5 +57,7 @@ class DatabaseTable {
         $record['primaryKey'] = $record[$primaryKey];
         $stmt = $this->pdo->prepare($query);
         $stmt->execute($record);
+
+        return $stmt;
     }
 }

@@ -2,6 +2,10 @@
 
 namespace Models;
 
+/**
+ * Class Category
+ * @package Models
+ */
 class Category {
 
     public $id;
@@ -28,11 +32,38 @@ class Category {
     public static function with($pdo, $array)
     {
         $category = new Category($pdo);
-        $category->id = $array['id'];
+        isset($array['id']) ? $category->id = $array['id'] : 0;
         $category->name = $array['name'];
         $category->slug = $array['slug'];
 
         return $category;
+    }
+
+    public function intoArray()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'slug' => $this->slug,
+        ];
+    }
+
+    /** Database operations:  */
+
+    public function save()
+    {
+        return $this->table->insert($this->intoArray());
+    }
+
+    public function delete($categoryId)
+    {
+        // Returns number of deleted rows;
+        return $this->table->delete('id', $categoryId);
+    }
+
+    public function update()
+    {
+        return $this->table->update($this->intoArray(), 'id');
     }
 
     public function findAll()
@@ -56,7 +87,7 @@ class Category {
     public function findById($categoryId)
     {
         $stmt = $this->table->find('id', $categoryId);
-        return self::with($this->pdo, $stmt);
+        return self::with($this->pdo, $stmt->fetch());
     }
 
 

@@ -54,18 +54,6 @@ class AdminController {
 
     private function getPage()
     {
-        if (isset($this->request['navigate'])) {
-            $page = $this->request['navigate'].'-template.php';
-
-
-            if (file_exists($path = TEMPLATES_PATH_ADMIN.$page)) {
-                return loadTemplate($path, $this->props);
-            }else {
-                return loadTemplate(TEMPLATES_PATH_ADMIN.'404-error-template.php', []);
-            }
-
-        }else {
-            return loadTemplate(TEMPLATES_PATH_ADMIN.'index-template.php', $this->props);
-        }
+        return loadTemplate(TEMPLATES_PATH_ADMIN.'index-template.php', $this->props);
     }
 }

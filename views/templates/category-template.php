@@ -23,6 +23,9 @@
         }
 
         foreach ($menuList as $record) {
+            if ($record->visible == 0) {
+                continue;
+            }
             echo '<li>';
 
             echo '<div class="details">';

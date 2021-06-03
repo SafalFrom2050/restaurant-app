@@ -3,6 +3,7 @@
 namespace admin\Controllers;
 
 
+use admin\Services\CategoryService;
 use Models\Category;
 
 class CategoryController {
@@ -25,6 +26,10 @@ class CategoryController {
 
     private function handleRequest()
     {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            CategoryService::create(getPDO())->performAction($this->request);
+        }
+
         $categories = Category::create(getPDO())->findAll();
 
         $this->props['categories'] = $categories;
