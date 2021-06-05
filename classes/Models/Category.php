@@ -15,6 +15,15 @@ class Category {
     public $pdo;
     public $table;
 
+    public function intoArray()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'slug' => $this->slug,
+        ];
+    }
+
     /**
      * Category constructor.
      */
@@ -29,23 +38,21 @@ class Category {
         return new Category($pdo);
     }
 
-    public static function with($pdo, $array)
+    public static function with($pdo, $record)
     {
         $category = new Category($pdo);
-        isset($array['id']) ? $category->id = $array['id'] : 0;
-        $category->name = $array['name'];
-        $category->slug = $array['slug'];
+
+        if (!is_array($record)) {
+            return $category;
+        }
+
+        foreach($record as $key => $value) {
+            // convert keys to camelCase first
+            $key = snakeToCamelCase($key);
+            $category->$key = $value;
+        }
 
         return $category;
-    }
-
-    public function intoArray()
-    {
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'slug' => $this->slug,
-        ];
     }
 
     /** Database operations:  */

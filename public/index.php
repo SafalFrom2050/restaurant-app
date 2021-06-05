@@ -2,6 +2,7 @@
 <?php
 
 use Controllers\AppController;
+use Models\Member;
 
 define('ROOT_PATH', dirname($_SERVER['DOCUMENT_ROOT']).'/');
 
@@ -26,7 +27,6 @@ const MODELS_PATH_ADMIN = ROOT_PATH . 'classes/admin/Models/';
 
 require ROOT_PATH.'functions/helper.php';
 require_once ROOT_PATH.'includes/autoloader.inc.php';
-
 
 $controller = new AppController($_GET);
 

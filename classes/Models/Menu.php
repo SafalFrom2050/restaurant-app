@@ -2,6 +2,7 @@
 
 namespace Models;
 
+
 class Menu {
     public $id;
     public $categoryId;
@@ -13,43 +14,6 @@ class Menu {
 
     public $pdo;
     public $table;
-    /**
-     * Menu constructor.
-     */
-    public function __construct($pdo)
-    {
-        $this->pdo = $pdo;
-        $this->table = new DatabaseTable($pdo, 'menu');
-    }
-    public static function create($pdo)
-    {
-        return new Menu($pdo);
-    }
-
-    public static function with($pdo, $array)
-    {
-        $menu = new Menu($pdo);
-
-        $menu->id = isset($array['id']) ? $array['id'] : null;
-        $menu->categorySlug = isset($array['category_slug']) ? $array['category_slug'] : null;
-        $menu->name = $array['name'];
-        $menu->price = $array['price'];
-        $menu->description = $array['description'];
-        $menu->visible = $array['visible'];
-
-
-        /** Assign category_id if supplied.
-         * Find category_id and assign if only category_slug is supplied.
-         */
-        if (isset($array['category_id'])) {
-            $menu->categoryId = $array['category_id'];
-        }else if (isset($array['category_slug'])) {
-            $category = Category::create(getPDO())->find($menu->categorySlug);
-            $menu->categoryId = $category->id;
-        }
-
-        return $menu;
-    }
 
     public function intoArray()
     {
@@ -64,6 +28,45 @@ class Menu {
         ];
     }
 
+    /**
+     * Menu constructor.
+     */
+    public function __construct($pdo)
+    {
+        $this->pdo = $pdo;
+        $this->table = new DatabaseTable($pdo, 'menu');
+    }
+    public static function create($pdo)
+    {
+        return new Menu($pdo);
+    }
+
+    public static function with($pdo, $record)
+    {
+        $menu = new Menu($pdo);
+
+        if (!is_array($record)) {
+            return $menu;
+        }
+
+        foreach($record as $key => $value) {
+            // convert keys to camelCase first
+            $key = snakeToCamelCase($key);
+            $menu->$key = $value;
+        }
+
+
+        /** Assign category_id if supplied.
+         * Find category_id and assign if only category_slug is supplied.
+         */
+        if (isset($record['category_slug']) && !isset($record['category_id'])) {
+            $category = Category::create(getPDO())->find($menu->categorySlug);
+            $menu->categoryId = $category->id;
+        }
+
+        return $menu;
+    }
+
 
     /** Database operations:  */
 
@@ -72,11 +75,15 @@ class Menu {
         return $this->table->insert($this->intoArray());
     }
 
-    public function update($record)
+    public function update($newRecord)
     {
-        $updated = array_merge($this->intoArray(), $record);
-        $menu = self::with($this->pdo, $updated);
-        return $this->table->update($menu->intoArray(), 'id');
+        foreach($newRecord as $key => $value) {
+            // convert keys to camelCase first
+            $key = snakeToCamelCase($key);
+            $this->$key = $value;
+        }
+
+        return $this->table->update($this->intoArray(), 'id');
     }
 
     public function delete($menuId)
@@ -97,7 +104,7 @@ class Menu {
 
         $records = [];
         foreach ($stmt as $record) {
-            $record = Menu::with(getPDO(), $record);
+            $record = self::with(getPDO(), $record);
             $records[] = $record;
         }
         return $records;

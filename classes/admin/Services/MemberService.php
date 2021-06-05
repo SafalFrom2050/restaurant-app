@@ -3,10 +3,9 @@
 namespace admin\Services;
 
 
-use Models\Menu;
+use Models\Member;
 
-class MenuService {
-
+class MemberService {
     public $pdo;
 
     public function __construct($pdo)
@@ -16,15 +15,16 @@ class MenuService {
 
     public static function create($pdo)
     {
-        return new MenuService($pdo);
+        return new MemberService($pdo);
     }
 
     public function performAction($request)
     {
+
+        // Workaround for unsupported HTTP methods
         if (!isset($request['_method'])) {
             return;
         }
-
         $method = strtolower($request['_method']);
 
         // Check for valid csrf token
@@ -33,11 +33,11 @@ class MenuService {
             return;
         }
 
-        /** Create menu */
+        /** Create member */
 
         if ($method === 'post') {
-            $menu = Menu::with(getPDO(), $request);
-            $menu->save();
+            $member = Member::with(getPDO(), $request);
+            $member->save();
         }
 
         /** Operations on existing rows */
@@ -47,11 +47,13 @@ class MenuService {
         }
 
         if ($method === 'delete') {
-            $menu = Menu::create($this->pdo);
-            $menu->delete($request['id']);
+            $member = Member::create($this->pdo);
+            $member->delete($request['id']);
         }else if ($method === 'put') {
-            $menu = Menu::create(getPDO())->findById($request['id']);
-            $menu->update($request);
+            $member = Member::with(getPDO(), $request);
+            $member->update($request);
+        }else if ($method === 'patch') {
+            // TODO: patch logic
         }
     }
 }

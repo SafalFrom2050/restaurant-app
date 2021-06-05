@@ -30,9 +30,7 @@ class CategoryController {
             CategoryService::create(getPDO())->performAction($this->request);
         }
 
-        $categories = Category::create(getPDO())->findAll();
-
-        $this->props['categories'] = $categories;
+        $this->props['categories'] = Category::create(getPDO())->findAll();
         $this->view = TEMPLATES_PATH_ADMIN.'categories-template.php';
     }
 }

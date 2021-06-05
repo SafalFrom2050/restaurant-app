@@ -25,8 +25,15 @@
                 <?php require COMPONENTS_PATH.'sidebar-li.php'?>
             </ul>
         </li>
-        <li><a href="/about">About Us</a></li>
         <li><a href="/faqs">FAQs</a></li>
+        <li>More
+            <ul>
+                <br>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/admin">Staff and Admins</a></li>
+            </ul>
+        </li>
+
     </ul>
 
 </nav>

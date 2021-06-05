@@ -1,4 +1,5 @@
 <?php
+$pdo = new PDO('mysql:dbname=kitchen;host=127.0.0.1', 'student', 'student');
 
 function loadTemplate($fileName, $templateVars)
 {
@@ -17,8 +18,50 @@ function loadTemplate($fileName, $templateVars)
     return ob_get_clean();
 }
 
-$pdo = new PDO('mysql:dbname=kitchen;host=127.0.0.1', 'student', 'student');
-function getPDO() {
+function getPDO()
+{
     return $GLOBALS['pdo'];
 }
 
+
+function snakeToCamelCase($str)
+{
+    // replace '_' with ' '(space)
+    $str = str_replace('_', ' ', $str);
+
+    // Capitalize 1st letter of each words, then replace ' '(space) with ''(empty string)
+    $str = str_replace(' ', '', ucwords($str));
+
+    // Lower case the 1st letter
+    return lcfirst($str);
+}
+
+function randomString($length = 8)
+{
+    return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
+}
+
+function csrf()
+{
+    echo '<input type="hidden" name="token" value="' . $_SESSION['token'] . '"/>';
+}
+
+function input_id($value)
+{
+    echo '<input type="hidden" name="id" value="'. $value . '" />';
+}
+
+function input_method($verb)
+{
+    echo '<input type="hidden" name="_method" value="' . $verb . '" />';
+}
+
+function input_submit($value)
+{
+    echo '<input type="submit" name="submit" value="' . $value . '" />';
+}
+
+function input_hidden($name, $value)
+{
+    echo '<input type="hidden" name="' . $name . '" value="' . $value . '" />';
+}

@@ -28,6 +28,12 @@ class CategoryService {
         }
         $method = strtolower($request['_method']);
 
+        // Check for valid csrf token
+        if (!isset($request['token']) || $request['token'] !== $_SESSION['token']){
+            echo 'Action Failed! (CSRF token missing or incorrect!)';
+            return;
+        }
+
         /** Create category */
 
         if ($method === 'post') {

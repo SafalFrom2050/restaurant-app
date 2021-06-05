@@ -2,7 +2,6 @@
 
 use Models\Category;
 
-$sideMenu = loadTemplate(COMPONENTS_PATH_ADMIN . 'sidebar-li.php', $props);
 
 $props = [];
 if (isset($_GET['id'])) {
@@ -11,8 +10,6 @@ if (isset($_GET['id'])) {
 }
 
 $content = loadTemplate(TEMPLATES_PATH_ADMIN . 'category-template.php', $props);
-
-$content = $sideMenu . $content;
 
 // Set props for layout
 $props = [

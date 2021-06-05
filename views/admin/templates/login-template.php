@@ -1,9 +1,15 @@
 <h2>Log in</h2>
 
-<form action="/admin" method="post" style="padding: 40px">
+<form action="" method="post" style="padding: 40px">
+
+    <label>Enter Username</label>
+    <input type="text" name="username" />
 
     <label>Enter Password</label>
     <input type="password" name="password" />
 
-    <input type="submit" name="submit" value="Log In" />
+    <?php
+    input_hidden('login', 'login');
+    input_submit('Log In');
+    ?>
 </form>

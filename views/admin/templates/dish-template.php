@@ -2,8 +2,6 @@
     <h2>Add Dish</h2>
 
     <form action="admin?navigate=menu" method="POST">
-        <input type="hidden" name="_method" value="<?php echo isset($id) ? 'PUT' : 'POST' ?>" />
-        <input type="hidden" name="id" value="<?php echo isset($id) ? $id : '' ?>" />
 
         <label>Name</label>
         <input type="text" name="name" value="<?php echo isset($name) ? $name : '' ?>"/>
@@ -27,7 +25,12 @@
 
         </select>
 
-        <input type="submit" name="submit" value="<?php echo isset($id) ? 'Edit' : 'Add' ?>" />
+        <?php
+        csrf();
+        input_method(isset($id) ? 'PUT' : 'POST');
+        input_id(isset($id) ? $id : '');
+        input_submit(isset($id) ? 'Edit' : 'Add');
+        ?>
 
     </form>
 </section>

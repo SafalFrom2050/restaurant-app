@@ -3,8 +3,6 @@
 use Models\Category;
 use Models\Menu;
 
-$sideMenu = loadTemplate(COMPONENTS_PATH_ADMIN . 'sidebar-li.php', $props);
-
 $props = [];
 if (isset($_GET['id'])) {
     $menu = Menu::create(getPDO());
@@ -14,8 +12,6 @@ if (isset($_GET['id'])) {
 $props['categories'] = Category::create(getPDO())->findAll();
 
 $content = loadTemplate(TEMPLATES_PATH_ADMIN . 'dish-template.php', $props);
-
-$content = $sideMenu . $content;
 
 // Set props for layout
 $props = [
