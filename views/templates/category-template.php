@@ -29,13 +29,24 @@
             echo '<li>';
 
             echo '<div class="details">';
+            echo '<img src="https://picsum.photos/1000/1000">';
+
             echo '<h3>£' . $record->price . '</h3>';
             echo '<h2>' . $record->name . '</h2>';
 
             echo '<p>' . nl2br($record->description) . '</p>';
 
+            echo '</div><br><br><br>';
+
+            require_once COMPONENTS_PATH . 'top-reviews.php';
+
+            echo '<div style="margin-top: 4rem">';
+            echo '<h3 style="float: unset; text-align: center;">More Photos</h3><br>';
+            echo '<img src="https://picsum.photos/1200/1200"">';
+            echo '<img src="https://picsum.photos/1200/1200"">';
 
             echo '</div>';
+
             echo '</li>';
         }
 

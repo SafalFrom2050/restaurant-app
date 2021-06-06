@@ -3,6 +3,7 @@
 
 use Controllers\AppController;
 use Models\Member;
+use Models\Review;
 
 define('ROOT_PATH', dirname($_SERVER['DOCUMENT_ROOT']).'/');
 

@@ -3,7 +3,6 @@
 namespace admin\Controllers;
 
 
-use http\Client\Curl\User;
 use Models\Member;
 
 class AdminController {

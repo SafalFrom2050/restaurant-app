@@ -30,7 +30,7 @@ class MenuController {
             MenuService::create(getPDO())->performAction($this->request);
         }
 
-        $menuList = Menu::create(getPDO())->findAllFoods();
+        $menuList = Menu::create(getPDO())->findAll();
 
         $this->props['menuList'] = $menuList;
         $this->view = TEMPLATES_PATH_ADMIN.'menu-template.php';

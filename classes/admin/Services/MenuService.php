@@ -50,8 +50,8 @@ class MenuService {
             $menu = Menu::create($this->pdo);
             $menu->delete($request['id']);
         }else if ($method === 'put') {
-            $menu = Menu::create(getPDO())->findById($request['id']);
-            $menu->update($request);
+            $menu = Menu::with(getPDO(), $request);
+            $menu->update();
         }
     }
 }

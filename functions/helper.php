@@ -36,6 +36,17 @@ function snakeToCamelCase($str)
     return lcfirst($str);
 }
 
+function camelToSnakeCase($str)
+{
+    return strtolower(
+        preg_replace(
+            ["/([A-Z]+)/", "/_([A-Z]+)([A-Z][a-z])/"],
+            ["_$1", "_$1_$2"],
+            lcfirst($str)
+        )
+    );
+}
+
 function randomString($length = 8)
 {
     return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);

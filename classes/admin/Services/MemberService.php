@@ -36,6 +36,7 @@ class MemberService {
         /** Create member */
 
         if ($method === 'post') {
+
             $member = Member::with(getPDO(), $request);
             $member->save();
         }
@@ -51,7 +52,7 @@ class MemberService {
             $member->delete($request['id']);
         }else if ($method === 'put') {
             $member = Member::with(getPDO(), $request);
-            $member->update($request);
+            $member->update();
         }else if ($method === 'patch') {
             // TODO: patch logic
         }
