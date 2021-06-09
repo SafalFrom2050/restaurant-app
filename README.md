@@ -13,3 +13,6 @@ https://stackoverflow.com/a/16319337/7967905
 
 ### PHP Router
 https://devdojo.com/course/create-a-php-routing-system
+
+### Upload Multiple Images
+https://www.codexworld.com/upload-multiple-images-store-in-database-php-mysql/

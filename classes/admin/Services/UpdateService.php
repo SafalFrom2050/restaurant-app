@@ -1,11 +1,11 @@
 <?php
 
-namespace Services;
+namespace admin\Services;
 
 
-use Models\Review;
+use Models\Update;
 
-class ReviewService {
+class UpdateService {
     public $pdo;
 
     public function __construct($pdo)
@@ -15,7 +15,7 @@ class ReviewService {
 
     public static function create($pdo)
     {
-        return new ReviewService($pdo);
+        return new UpdateService($pdo);
     }
 
     public function performAction($request)
@@ -27,6 +27,7 @@ class ReviewService {
         $method = strtolower($request['_method']);
 
         // Check for valid csrf token
+        try_session_start();
         if (!isset($request['token']) || $request['token'] !== $_SESSION['token']){
             echo 'Action Failed! (CSRF token missing or incorrect!)';
             return;
@@ -35,8 +36,9 @@ class ReviewService {
         /** Create */
 
         if ($method === 'post') {
-            $review = Review::with(getPDO(), $request);
-            $review->save();
+            $update = Update::with(getPDO(), $request);
+            $update->save();
+            echo 'Update has been added successfully!';
         }
 
         /** Operations on existing rows */
@@ -46,11 +48,11 @@ class ReviewService {
         }
 
         if ($method === 'delete') {
-            $review = Review::create($this->pdo);
-            $review->delete($request['id']);
+            $update = Update::create($this->pdo);
+            $update->delete($request['id']);
         }else if ($method === 'put') {
-            $review = Review::with(getPDO(), $request);
-            $review->update();
+            $update = Update::with(getPDO(), $request);
+            $update->update();
         }
     }
 }

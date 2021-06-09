@@ -3,9 +3,9 @@
 namespace Services;
 
 
-use Models\Review;
+use Models\Booking;
 
-class ReviewService {
+class BookingService {
     public $pdo;
 
     public function __construct($pdo)
@@ -15,7 +15,7 @@ class ReviewService {
 
     public static function create($pdo)
     {
-        return new ReviewService($pdo);
+        return new BookingService($pdo);
     }
 
     public function performAction($request)
@@ -27,6 +27,7 @@ class ReviewService {
         $method = strtolower($request['_method']);
 
         // Check for valid csrf token
+        try_session_start();
         if (!isset($request['token']) || $request['token'] !== $_SESSION['token']){
             echo 'Action Failed! (CSRF token missing or incorrect!)';
             return;
@@ -35,8 +36,9 @@ class ReviewService {
         /** Create */
 
         if ($method === 'post') {
-            $review = Review::with(getPDO(), $request);
-            $review->save();
+            $booking = Booking::with(getPDO(), $request);
+            $booking->save();
+            echo 'Your booking request has been placed successfully!';
         }
 
         /** Operations on existing rows */
@@ -46,11 +48,11 @@ class ReviewService {
         }
 
         if ($method === 'delete') {
-            $review = Review::create($this->pdo);
-            $review->delete($request['id']);
+            $booking = Booking::create($this->pdo);
+            $booking->delete($request['id']);
         }else if ($method === 'put') {
-            $review = Review::with(getPDO(), $request);
-            $review->update();
+            $booking = Booking::with(getPDO(), $request);
+            $booking->update();
         }
     }
 }

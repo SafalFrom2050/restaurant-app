@@ -31,7 +31,7 @@ class AuthService {
                     $_SESSION['user_id'] = $user->id;
 
                     // Used for csrf protection
-                    $_SESSION['token'] = bin2hex(randomString(25));
+                    setSessionToken();
                 }else {
                     echo 'Password is invalid';
                 }

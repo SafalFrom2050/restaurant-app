@@ -52,6 +52,20 @@ function randomString($length = 8)
     return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
 }
 
+function setSessionToken()
+{
+    try_session_start();
+    // Used for csrf protection
+    $_SESSION['token'] = bin2hex(randomString(25));
+}
+
+function try_session_start()
+{
+    if(session_id() === ''){
+        session_start();
+    }
+}
+
 function csrf()
 {
     echo '<input type="hidden" name="token" value="' . $_SESSION['token'] . '"/>';

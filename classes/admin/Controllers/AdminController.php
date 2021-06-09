@@ -26,6 +26,14 @@ class AdminController {
                 'title' => 'Reviews',
                 'link' => '/admin/reviews',
             ],
+            '3' => [
+                'title' => 'Bookings',
+                'link' => '/admin/bookings',
+            ],
+            '4' => [
+                'title' => 'Updates',
+                'link' => '/admin/updates',
+            ],
         ],
         'adminOptions' => [
             '0' => [
