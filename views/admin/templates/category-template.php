@@ -1,7 +1,7 @@
 <section class="right">
     <h2>Add Category</h2>
 
-    <form action="admin?navigate=categories" method="POST">
+    <form action="/admin/categories" method="POST">
 
         <label>Name</label>
         <input type="text" name="name" value="<?php echo isset($name) ? $name : '' ?>"/>

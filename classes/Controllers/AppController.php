@@ -6,12 +6,12 @@ namespace Controllers;
 use Models\Category;
 
 class AppController {
-    public $request;
+    public $requestUri;
     public $view;
 
-    public function __construct($request)
+    public function __construct($requestUri)
     {
-        $this->request =$request;
+        $this->requestUri = $requestUri;
         $this->handleRequest();
     }
 
@@ -23,17 +23,17 @@ class AppController {
     private function handleRequest()
     {
 
-        if (isset($this->request['page'])) {
-            // Removes extra '/' from requested page if any
-            $requestPage = trim($this->request['page'], '/');
+        // Removes extra '/' from requested page if any
+        $requestUri = getSanitizedRequestUri();
 
-            /** Don't allow users visit nested paths directly.
-             *
-             * For: v.je/admin/categories @param $requestPage = 'admin'
-             * instead of 'admin/categories'.
-             */
+        /** Don't allow users visit nested paths directly.
+         *
+         * For: v.je/admin/categories @param $requestPage = 'admin'
+         * instead of 'admin/categories'.
+         */
+        $requestPage = $requestUri[0];
 
-            $requestPage = explode('/', $requestPage)[0];
+        if($requestPage !== ""){
             $view = ROUTES_PATH.$requestPage.'.php';
         }else {
             $view = ROUTES_PATH.'home.php';
@@ -46,8 +46,8 @@ class AppController {
             require ROUTES_PATH.'category.php';
         }
 
-        $props['categoryList'] = Category::create(getPDO())->findAll();
+        $pageProps['categoryList'] = Category::create(getPDO())->findAll();
 
-        $this->view = loadTemplate(LAYOUTS_PATH.'layout.php', isset($props) ? $props : []);
+        $this->view = loadTemplate(LAYOUTS_PATH.'layout.php', isset($pageProps) ? $pageProps : []);
     }
 }

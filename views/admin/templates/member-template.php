@@ -1,7 +1,7 @@
 <section class="right">
     <h2>Add Member</h2>
 
-    <form action="admin?navigate=members" method="POST">
+    <form action="/admin/members" method="POST">
 
         <label for="full_name">Full Name</label>
         <input type="text" autocomplete="name" name="full_name" id="full_name" value="<?php echo isset($full_name) ? $full_name : '' ?>"/>

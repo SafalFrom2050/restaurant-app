@@ -1,23 +1,29 @@
-<div class="info" style="width: 50%; margin-top: 2rem;">
-    <h3 style="float: left;">Reviews</h3><br><br>
-    <div>
+<?php
 
-        <h4><a href="#">Safal Sharma</a></h4>
-        Rating: 5
-        <p>This is the best meal ever.</p>
+use Models\Review;
 
-    </div>
-    <div>
-        <h4><a href="#">Safal Sharma</a></h4>
-        Rating: 5
-        <p>This is the best meal ever.</p>
+$reviewList = Review::create(getPDO())->findAllWithMenuId($menu->id);
 
-    </div>
-    <div>
-        <h4><a href="#">Safal Sharma</a></h4>
-        Rating: 5
-        <p>This is the best meal ever.</p>
+if (count($reviewList) > 0) {
+    echo '<div class="info" style="width: 50%; margin-top: 2rem;">';
+    echo '<h3 style="float: left;">
+            <a href="reviews?menu=' . $menu->id . '">Reviews</a>
+          </h3><br><br>';
 
-    </div>
+    $count = 0;
+    foreach ($reviewList as $review) {
+        if ($review->moderated) {
+            require COMPONENTS_PATH . 'review-item.php';
+        }
+        $count++;
+        if ($count >= 3) {
+            break;
+        }
+    }
+    echo '<a href="reviews?menu='. $menu->id .'">See More</a>';
+    echo '</div>';
+}
 
-</div>
+
+
+

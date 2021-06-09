@@ -2,7 +2,7 @@
 
     <h2>Member</h2>
 
-    <a class="new" href="admin?navigate=member">Add new member</a>
+    <a class="new" href="/admin/member">Add new member</a>
 
     <table>
         <thead>

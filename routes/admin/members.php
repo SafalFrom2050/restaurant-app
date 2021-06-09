@@ -12,7 +12,7 @@ if (!isset($props) || !$props['isAdmin']) {
     $content = $controller->index();
 
 // Set props for layout
-    $props = [
+    $pageProps = [
         'title' => "Kate's Kitchen - Manage Members",
         'content' => $content,
         'layoutStyle' => 'sidebar',

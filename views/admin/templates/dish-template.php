@@ -1,7 +1,7 @@
 <section class="right">
     <h2>Add Dish</h2>
 
-    <form action="admin?navigate=menu" method="POST">
+    <form action="/admin/menu" method="POST">
 
         <label>Name</label>
         <input type="text" name="name" value="<?php echo isset($name) ? $name : '' ?>"/>

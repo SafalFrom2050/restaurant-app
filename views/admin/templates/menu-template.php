@@ -1,7 +1,7 @@
 <section class="right">
         <h2>Menu</h2>
 
-        <a class="new" href="/admin?navigate=dish">Add new dish</a>
+        <a class="new" href="/admin/dish">Add new dish</a>
 
         <table>
             <thead>

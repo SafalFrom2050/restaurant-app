@@ -22,20 +22,20 @@
             echo '</div>';
         }
 
-        foreach ($menuList as $record) {
-            if ($record->visible == 0) {
+        foreach ($menuList as $menu) {
+            if ($menu->visible == 0) {
                 continue;
             }
-            echo '<li>';
+            echo '<li style="margin-top:3rem; margin-bottom:3rem;">';
 
-            echo '<div class="details">';
+            echo '<div class="details" style="margin-top:3rem; margin-bottom:3rem;">';
             echo '<img src="https://picsum.photos/1000/1000">';
 
-            echo '<h3>£' . $record->price . '</h3>';
-            echo '<h2>' . $record->name . '</h2>';
+            echo '<h3>£' . $menu->price . '</h3>';
+            echo '<h2>' . $menu->name . '</h2>';
 
-            echo '<p>' . nl2br($record->description) . '</p>';
-
+            echo '<p>' . nl2br($menu->description) . '</p>';
+            echo '<a href="add-review?menu=' . $menu->id . '">Add a review</a>';
             echo '</div><br><br><br>';
 
             require_once COMPONENTS_PATH . 'top-reviews.php';

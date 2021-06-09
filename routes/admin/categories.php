@@ -7,7 +7,7 @@ $controller = new CategoryController($_REQUEST);
 $content = $controller->index();
 
 // Set props for layout
-$props = [
+$pageProps = [
     'title' => "Kate's Kitchen - Manage Menu",
     'content' => $content,
     'layoutStyle' => 'sidebar',

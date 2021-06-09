@@ -15,7 +15,7 @@ if (!isset($props) || !$props['isAdmin']) {
     $content = loadTemplate(TEMPLATES_PATH_ADMIN . 'member-template.php', $props);
 
     // Set props for layout
-    $props = [
+    $pageProps = [
         'title' => "Kate's Kitchen - Manage Users",
         'content' => $content,
         'layoutStyle' => 'sidebar',

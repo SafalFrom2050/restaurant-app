@@ -10,7 +10,7 @@
             // <li><a href="menu.php">Menu</a></li>
 
 
-            echo '<li><a href="/'.$option['link'].'">'.$option['title'].'</a></li>';
+            echo '<li><a href="'.$option['link'].'">'.$option['title'].'</a></li>';
         }
 
         if (isset($isAdmin, $adminOptions) && $isAdmin) {
@@ -18,7 +18,7 @@
                 // <li><a href="menu.php">Menu</a></li>
 
 
-                echo '<li><a href="/'.$option['link'].'">'.$option['title'].'</a></li>';
+                echo '<li><a href="'.$option['link'].'">'.$option['title'].'</a></li>';
             }
         }
         ?>

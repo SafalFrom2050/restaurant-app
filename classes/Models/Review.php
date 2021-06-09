@@ -38,4 +38,10 @@ class Review extends DatabaseModel {
 
         return $review;
     }
+
+    public function findAllWithMenuId($menuId)
+    {
+        /** Always sort the reviews by highest rating first */
+        return $this->findByOrderDESC('menu_id', $menuId, 'rating');
+    }
 }

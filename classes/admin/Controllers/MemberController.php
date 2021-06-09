@@ -23,7 +23,7 @@ class MemberController {
 
     public function index()
     {
-        return $this->view;
+        return loadTemplate($this->view, $this->props);
     }
 
     public function handleRequest()
@@ -33,6 +33,6 @@ class MemberController {
         }
 
         $this->props['members'] = Member::create(getPDO())->findAll();
-        $this->view = loadTemplate(TEMPLATES_PATH_ADMIN . 'members-template.php', $this->props);
+        $this->view = TEMPLATES_PATH_ADMIN . 'members-template.php';
     }
 }

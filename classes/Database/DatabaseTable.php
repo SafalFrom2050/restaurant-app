@@ -31,6 +31,16 @@ class DatabaseTable {
         $stmt->execute($criteria);
         return $stmt;
     }
+    public function findByOrderDESC($field, $value, $orderBy){
+        $stmt = $this->pdo
+            ->prepare('SELECT * FROM ' . $this->table . ' WHERE ' . $field . ' = :value Order By ' . $orderBy . ' DESC');
+        $criteria = [
+            'value' => $value
+        ];
+        $stmt->execute($criteria);
+        return $stmt;
+    }
+
     public function findAll() {
         $stmt = $this->pdo->prepare('SELECT * FROM ' . $this->table );
         $stmt->execute();

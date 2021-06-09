@@ -10,3 +10,6 @@ https://code-boxx.com/simple-csrf-token-php/
 
 ### Camel case to snake case converter
 https://stackoverflow.com/a/16319337/7967905
+
+### PHP Router
+https://devdojo.com/course/create-a-php-routing-system

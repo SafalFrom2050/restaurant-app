@@ -76,3 +76,16 @@ function input_hidden($name, $value)
 {
     echo '<input type="hidden" name="' . $name . '" value="' . $value . '" />';
 }
+
+function getSanitizedRequestUri(){
+
+    // Removes extra '/' from requested page if any
+    $requestUri = trim($_SERVER['REQUEST_URI'], '/');
+
+    $requestUri = explode('/', $requestUri);
+
+    // Also remove GET params (at last array index)
+    $requestUri[count($requestUri)-1] = explode('?', $requestUri[count($requestUri)-1])[0];
+
+    return $requestUri;
+}

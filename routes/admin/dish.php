@@ -14,7 +14,7 @@ $props['categories'] = Category::create(getPDO())->findAll();
 $content = loadTemplate(TEMPLATES_PATH_ADMIN . 'dish-template.php', $props);
 
 // Set props for layout
-$props = [
+$pageProps = [
     'title' => "Kate's Kitchen - Manage Menu",
     'content' => $content,
     'layoutStyle' => 'sidebar',

@@ -2,7 +2,7 @@
 
         <h2>Categories</h2>
 
-        <a class="new" href="admin?navigate=category">Add new category</a>
+        <a class="new" href="/admin/category">Add new category</a>
 
     <table>
         <thead>

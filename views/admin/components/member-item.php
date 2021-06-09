@@ -4,7 +4,7 @@
     <td><?php echo $member->username ?></td>
 
     <td><?php echo $t = $member->isAdmin ? "Yes" : "No" ?></td>
-    <td><a style="float: right" href="admin?navigate=member&id=<?php echo $member->id ?>">Edit</a></td>
+    <td><a style="float: right" href="/admin/member?id=<?php echo $member->id ?>">Edit</a></td>
     <td>
         <form method="post" action="">
             <?php

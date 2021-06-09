@@ -2,7 +2,7 @@
 
 $content = loadTemplate(ROOT_PATH.'views/templates/faqs-template.php', []);
 
-$props = [
+$pageProps = [
     'title' => "Kate's Kitchen - FAQS",
     'content' => $content,
     'layoutStyle' => 'home',

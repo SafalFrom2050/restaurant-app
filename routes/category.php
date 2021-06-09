@@ -7,7 +7,7 @@ $controller = new CategoryController($_GET);
 $content = $controller->index();
 
 // Set props for layout
-$props = [
+$pageProps = [
     'title' => $controller->getPageTitle(),
     'content' => $content,
     'layoutStyle' => 'sidebar',

@@ -10,7 +10,7 @@ $content = loadTemplate(TEMPLATES_PATH.'home-template.php', $props);
 
 
 // Set props for layout
-$props = [
+$pageProps = [
     'title' => "Kate's Kitchen - Home",
     'content' => $content,
     'layoutStyle' => 'home',

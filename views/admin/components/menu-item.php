@@ -2,9 +2,9 @@
 <tr>
     <td> <?php echo $record->name ?> </td>
     <td><?php echo $record->price ?></td>
-    <td><a style="float: right" href="/admin/?navigate=dish&id=<?php echo $record->id ?>">Edit</a></td>
+    <td><a style="float: right" href="/admin/dish?id=<?php echo $record->id ?>">Edit</a></td>
     <td>
-        <form method="post" action="/admin/?navigate=menu">
+        <form method="post" action="/admin/menu">
             <?php
             csrf();
             input_id($record->id);
@@ -20,7 +20,7 @@
     </td>
 
     <td>
-        <form method="post" action="/admin/?navigate=menu">
+        <form method="post" action="/admin/menu">
             <?php
             csrf();
             input_id($record->id);

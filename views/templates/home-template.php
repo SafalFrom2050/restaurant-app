@@ -6,4 +6,3 @@
 <ul>
     <?php require COMPONENTS_PATH.'sidebar-li.php'?>
 </ul>
-</li>

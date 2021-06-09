@@ -12,7 +12,7 @@ if (isset($_GET['id'])) {
 $content = loadTemplate(TEMPLATES_PATH_ADMIN . 'category-template.php', $props);
 
 // Set props for layout
-$props = [
+$pageProps = [
     'title' => "Kate's Kitchen - Manage Category",
     'content' => $content,
     'layoutStyle' => 'sidebar',

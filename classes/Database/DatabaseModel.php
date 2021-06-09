@@ -77,6 +77,19 @@ class DatabaseModel {
         return $models;
     }
 
+    public function findByOrderDESC($field, $value, $orderBy)
+    {
+        $stmt = $this->table->findByOrderDESC($field, $value, $orderBy);
+        $models = [];
+        foreach ($stmt as $record) {
+            $model = $this->make(new DatabaseModel($this->pdo), $record);
+            $model->table = $this->table;
+            $models[] = $model;
+        }
+
+        return $models;
+    }
+
     public function findAllHaving($key, $value)
     {
         $stmt = $this->table->find($key, $value);
