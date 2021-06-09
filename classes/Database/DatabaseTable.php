@@ -20,7 +20,7 @@ class DatabaseTable {
         $stmt = $this->pdo->prepare($query);
         $stmt->execute($record);
 
-        return $stmt->fetch();
+        return $this->pdo->lastInsertId();
     }
 
     public function find($field, $value) {

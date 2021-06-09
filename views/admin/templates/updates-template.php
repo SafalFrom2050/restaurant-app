@@ -7,10 +7,10 @@
     <table>
         <thead>
         <tr>
-            <th style="width: 30%">Date</th>
-            <th style="width: 25%">Title</th>
-            <th style="width: 10%">Description</th>
-            <th style="width: 10%">Photo</th>
+            <th style="width: 20%">Date</th>
+            <th style="width: 20%">Title</th>
+            <th style="width: 30%">Description</th>
+            <th style="width: 5%">Photo</th>
 
             <th style="width: 40%">&nbsp;</th>
             <th style="width: 5%">&nbsp;</th>

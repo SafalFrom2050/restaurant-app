@@ -3,7 +3,9 @@
 namespace admin\Services;
 
 
+use Models\Image;
 use Models\Update;
+use Services\ImageService;
 
 class UpdateService {
     public $pdo;
@@ -27,6 +29,7 @@ class UpdateService {
         $method = strtolower($request['_method']);
 
         // Check for valid csrf token
+
         try_session_start();
         if (!isset($request['token']) || $request['token'] !== $_SESSION['token']){
             echo 'Action Failed! (CSRF token missing or incorrect!)';
@@ -36,9 +39,14 @@ class UpdateService {
         /** Create */
 
         if ($method === 'post') {
+            $imageService =  ImageService::create('../public/images/updates/');
+            $imageService->uploadImage();
+
             $update = Update::with(getPDO(), $request);
+            $update->imageId = $imageService->getImageId();
             $update->save();
             echo 'Update has been added successfully!';
+            header('location: /admin/updates');
         }
 
         /** Operations on existing rows */
@@ -51,8 +59,17 @@ class UpdateService {
             $update = Update::create($this->pdo);
             $update->delete($request['id']);
         }else if ($method === 'put') {
+            $imageService =  ImageService::create('../public/images/updates/');
+            $imageService->uploadImage();
+
             $update = Update::with(getPDO(), $request);
+            if ($imageService->getImageId() !== null){
+                $update->imageId = $imageService->getImageId();
+            }
             $update->update();
+
+            echo 'Update has been edited successfully!';
+            header('location: /admin/updates');
         }
     }
 }

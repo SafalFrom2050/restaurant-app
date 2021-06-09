@@ -39,6 +39,7 @@ class Member extends DatabaseModel {
         return $member;
     }
 
+    // @Override
     public function intoArray()
     {
         if(isset($this->password)) {

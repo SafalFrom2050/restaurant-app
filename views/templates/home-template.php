@@ -4,7 +4,9 @@
 
 <h2>Take a look at our menu:</h2>
 <ul>
-    <?php require COMPONENTS_PATH.'sidebar-li.php'?>
+    <?php use Models\Image;
+
+    require COMPONENTS_PATH.'sidebar-li.php'?>
 </ul>
 
 <br> <br> <br>
@@ -19,9 +21,12 @@
         echo '<h3 style="float: unset">' . $update->title . '</h3>';
 
         echo '<h5 style="font-weight: lighter">' . $update->date . '</h5><br><br>';
+        if (isset($update->imageId)) {
+            $imageName = Image::create(getPDO())->find($update->imageId)->fileName;
+            echo '<img style="width:100%; margin-bottom:2rem;" src="images/updates/' . $imageName . '">';
+        }
         echo '<p>' . $update->description . '</p>';
 
-        echo $update->photo;
 
         echo '</li>';
     }

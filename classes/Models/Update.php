@@ -13,7 +13,7 @@ class Update extends DatabaseModel {
         'date',
         'title',
         'description',
-        'photo',
+        'image_id',
     ];
 
     public function __construct($pdo)
