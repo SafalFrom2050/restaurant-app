@@ -1,6 +1,6 @@
 <section class="right">
 
-    <h2>Member</h2>
+    <h2>Updates</h2>
 
     <a class="new" href="/admin/add-update">Add new update</a>
 

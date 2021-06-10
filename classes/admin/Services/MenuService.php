@@ -4,6 +4,8 @@ namespace admin\Services;
 
 
 use Models\Menu;
+use Models\MenuImage;
+use Services\ImageService;
 
 class MenuService {
 
@@ -36,8 +38,7 @@ class MenuService {
         /** Create menu */
 
         if ($method === 'post') {
-            $menu = Menu::with(getPDO(), $request);
-            $menu->save();
+            $this->createMenu($request);
         }
 
         /** Operations on existing rows */
@@ -50,8 +51,48 @@ class MenuService {
             $menu = Menu::create($this->pdo);
             $menu->delete($request['id']);
         }else if ($method === 'put') {
-            $menu = Menu::with(getPDO(), $request);
-            $menu->update();
+            $this->updateMenu($request);
+        }
+    }
+
+    public function createMenu($request)
+    {
+        $imageService =  ImageService::create('../public/images/menu/');
+        $imageService->uploadImage();
+
+        $imageIds = $imageService->getImageId();
+
+        $menu = Menu::with(getPDO(), $request);
+        $menuId = $menu->save();
+
+        foreach ($imageIds as $imageId) {
+            MenuImage::with(getPDO(), ['image_id' => $imageId, 'menu_id' => $menuId])->save();
+        }
+    }
+
+    public function updateMenu($request)
+    {
+        $imageService = ImageService::create('../public/images/menu/');
+        $imageService->uploadImage();
+
+        $imageIds = $imageService->getImageId();
+
+        $menu = Menu::with(getPDO(), $request);
+        $menu->update();
+
+        if (count($imageIds) <= 0) {
+            return;
+        }
+
+        // removing existing entries before adding new one
+        $existingMenuImages = MenuImage::create(getPDO())->findAllHaving('menu_id', $menu->id);
+        foreach ($existingMenuImages as $menuImage) {
+            $menuImage->delete();
+        }
+
+        // Adding new ones
+        foreach ($imageIds as $imageId) {
+            MenuImage::with(getPDO(), ['image_id' => $imageId, 'menu_id' => $menu->id])->save();
         }
     }
 }

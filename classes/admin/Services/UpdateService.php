@@ -43,7 +43,7 @@ class UpdateService {
             $imageService->uploadImage();
 
             $update = Update::with(getPDO(), $request);
-            $update->imageId = $imageService->getImageId();
+            $update->imageId = $imageService->getImageId()[0];
             $update->save();
             echo 'Update has been added successfully!';
             header('location: /admin/updates');
@@ -64,7 +64,7 @@ class UpdateService {
 
             $update = Update::with(getPDO(), $request);
             if ($imageService->getImageId() !== null){
-                $update->imageId = $imageService->getImageId();
+                $update->imageId = $imageService->getImageId()[0];
             }
             $update->update();
 

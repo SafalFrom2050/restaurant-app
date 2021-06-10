@@ -8,7 +8,7 @@ use Models\Image;
 class ImageService {
     public $pdo;
     public $imageDir;
-    private $imageId;
+    private $imageId = [];
 
     public function __construct($imageDir)
     {
@@ -54,7 +54,7 @@ class ImageService {
                     if(move_uploaded_file($_FILES["photos"]["tmp_name"][$key], $targetFilePath)){
                         // Add to database
                         $image->fileName = $fileName;
-                        $this->imageId = $image->save();
+                        $this->imageId[] = $image->save();
                     }else{
                         $errorMsg .= 'Error uploading: ' . $_FILES['photos']['name'][$key].' | ';
                     }

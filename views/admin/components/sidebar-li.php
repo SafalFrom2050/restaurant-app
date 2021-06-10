@@ -13,6 +13,10 @@
             echo '<li><a href="'.$option['link'].'">'.$option['title'].'</a></li>';
         }
 
+        echo '<li style="margin-top:2rem; padding-bottom: 0.5rem; border-bottom: solid yellow 4px; color: white">
+                    Admin
+               </li>';
+
         if (isset($isAdmin, $adminOptions) && $isAdmin) {
             foreach ($adminOptions as $option) {
                 // <li><a href="menu.php">Menu</a></li>

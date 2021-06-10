@@ -1,7 +1,7 @@
 <section class="right">
     <h2>Add Dish</h2>
 
-    <form action="/admin/menu" method="POST">
+    <form action="/admin/menu" method="POST" enctype="multipart/form-data">
 
         <label>Name</label>
         <input type="text" name="name" value="<?php echo isset($name) ? $name : '' ?>"/>
@@ -24,6 +24,9 @@
             ?>
 
         </select>
+
+        <label>Image</label>
+        <input type="file" name="photos[]" id="photos" multiple/>
 
         <?php
         csrf();

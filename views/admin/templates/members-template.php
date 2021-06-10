@@ -1,6 +1,6 @@
 <section class="right">
 
-    <h2>Member</h2>
+    <h2>Members</h2>
 
     <a class="new" href="/admin/member">Add new member</a>
 

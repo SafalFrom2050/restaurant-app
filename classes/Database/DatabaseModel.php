@@ -53,10 +53,13 @@ class DatabaseModel {
         return $this->table->insert($this->intoArray());
     }
 
-    public function delete($categoryId)
+    public function delete($id = -1)
     {
+        if ($id === -1) {
+            $id = $this->id;
+        }
         // Returns number of deleted rows;
-        return $this->table->delete('id', $categoryId);
+        return $this->table->delete('id', $id);
     }
 
     public function update()
