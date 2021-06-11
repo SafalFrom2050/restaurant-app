@@ -1,3 +1,23 @@
+# Installation (Using v.je Vagrant Box)
+
+ * Initialize v.je
+            
+        vagrant init vje/min
+   
+ * Clone the project under *websites/default/*
+        
+        git clone https://github.com/SafalFrom2050/restaurant-app.git
+
+ * Add *database.sql* file under *websites/* for automatic import
+
+
+ * Start v.je box
+
+        vagrant up
+
+ * Open [v.je](v.je) link in the browser
+
+
 # References:
 
 ### Random String Generator

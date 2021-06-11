@@ -1,5 +1,7 @@
 <?php
-$pdo = new PDO('mysql:dbname=kitchen;host=v.je', 'v.je', 'v.je');
+
+// Contains $pdo
+require_once '../database.config.php';
 
 function loadTemplate($fileName, $templateVars)
 {
