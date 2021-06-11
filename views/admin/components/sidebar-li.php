@@ -29,6 +29,12 @@
                 echo '<li><a href="'.$option['link'].'">'.$option['title'].'</a></li>';
             }
         }
+
+        echo '<li style="margin-top:2rem; padding-bottom: 0.5rem; border-bottom: solid yellow 4px; color: white">
+                    Account
+               </li>';
+        echo '<li><a href="/admin/logout">Logout</a></li>';
+
         ?>
 
     </ul>
