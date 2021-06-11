@@ -35,8 +35,7 @@ class ReviewService {
         /** Create */
 
         if ($method === 'post') {
-            $review = Review::with(getPDO(), $request);
-            $review->save();
+            $this->createReview($request);
         }
 
         /** Operations on existing rows */
@@ -46,11 +45,27 @@ class ReviewService {
         }
 
         if ($method === 'delete') {
-            $review = Review::create($this->pdo);
-            $review->delete($request['id']);
+            $this->deleteReview($request);
         }else if ($method === 'put') {
-            $review = Review::with(getPDO(), $request);
-            $review->update();
+            $this->updateReview($request);
         }
+    }
+
+    public function createReview($request)
+    {
+        $review = Review::with(getPDO(), $request);
+        return $review->save();
+    }
+
+    public function deleteReview($request)
+    {
+        $review = Review::create($this->pdo);
+        $review->delete($request['id']);
+    }
+
+    public function updateReview($request)
+    {
+        $review = Review::with(getPDO(), $request);
+        $review->update();
     }
 }

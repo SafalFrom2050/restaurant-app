@@ -39,14 +39,7 @@ class UpdateService {
         /** Create */
 
         if ($method === 'post') {
-            $imageService =  ImageService::create('../public/images/updates/');
-            $imageService->uploadImage();
-
-            $update = Update::with(getPDO(), $request);
-            $update->imageId = $imageService->getImageId()[0];
-            $update->save();
-            echo 'Update has been added successfully!';
-            header('location: /admin/updates');
+            $this->createUpdate($request);
         }
 
         /** Operations on existing rows */
@@ -56,20 +49,44 @@ class UpdateService {
         }
 
         if ($method === 'delete') {
-            $update = Update::create($this->pdo);
-            $update->delete($request['id']);
+            $this->deleteUpdate($request);
         }else if ($method === 'put') {
-            $imageService =  ImageService::create('../public/images/updates/');
-            $imageService->uploadImage();
-
-            $update = Update::with(getPDO(), $request);
-            if ($imageService->getImageId() !== null){
-                $update->imageId = $imageService->getImageId()[0];
-            }
-            $update->update();
-
-            echo 'Update has been edited successfully!';
-            header('location: /admin/updates');
+            $this->updateUpdate($request);
         }
+    }
+
+    public function createUpdate($request)
+    {
+        $imageService =  ImageService::create('../public/images/updates/');
+        $imageService->uploadImage();
+
+        $update = Update::with(getPDO(), $request);
+        if (isset($imageService->getImageId()[0])){
+            $update->imageId = $imageService->getImageId()[0];
+        }
+        $id = $update->save();
+        echo 'Update has been added successfully!';
+        return $id;
+    }
+
+    public function updateUpdate($request)
+    {
+        $imageService =  ImageService::create('../public/images/updates/');
+        $imageService->uploadImage();
+
+        $update = Update::with(getPDO(), $request);
+        if (isset($imageService->getImageId()[0])){
+            $update->imageId = $imageService->getImageId()[0];
+        }
+        $update->update();
+
+        echo 'Update has been edited!';
+    }
+
+    public function deleteUpdate($request)
+    {
+        $update = Update::create($this->pdo);
+        $update->delete($request['id']);
+        echo 'Update has been deleted!';
     }
 }

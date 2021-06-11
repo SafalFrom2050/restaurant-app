@@ -8,6 +8,13 @@
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <file>includes/helper.php</file>
+            <file>classes/Services/ReviewService.php</file>
+            <file>classes/Services/BookingService.php</file>
+            <file>classes/auth/Services/AuthService.php</file>
+            <file>classes/Database/DatabaseTable.php</file>
+            <file>classes/Database/DatabaseModel.php</file>
+            <file>classes/Models/Member.php</file>
+            <file>classes/Models/Member.php</file>
         </whitelist>
     </filter>
 </phpunit>

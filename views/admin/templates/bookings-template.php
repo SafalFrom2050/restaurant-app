@@ -1,6 +1,6 @@
 <section class="right">
 
-    <h2>Member</h2>
+    <h2>Bookings</h2>
     <?php
         if ($processed) {
             $linkText = 'View Unprocessed';

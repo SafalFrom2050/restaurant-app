@@ -4,6 +4,8 @@ namespace admin\Services;
 
 
 use Models\Member;
+use Validators\MemberValidator;
+use Validators\Validator;
 
 class MemberService {
     public $pdo;
@@ -36,9 +38,7 @@ class MemberService {
         /** Create member */
 
         if ($method === 'post') {
-
-            $member = Member::with(getPDO(), $request);
-            $member->save();
+            $this->createMember($request);
         }
 
         /** Operations on existing rows */
@@ -48,13 +48,39 @@ class MemberService {
         }
 
         if ($method === 'delete') {
-            $member = Member::create($this->pdo);
-            $member->delete($request['id']);
+            $this->deleteMember($request);
         }else if ($method === 'put') {
-            $member = Member::with(getPDO(), $request);
-            $member->update();
-        }else if ($method === 'patch') {
-            // TODO: patch logic
+            $this->updateMember($request);
         }
+    }
+
+    public function createMember($request)
+    {
+
+        if($error = MemberValidator::create($request)->createMemberError()) {
+            echo $error;
+            return -1;
+        }
+
+        $member = Member::with(getPDO(), $request);
+        $id = $member->save();
+
+        echo 'New member has been created!';
+        return $id;
+    }
+
+    public function updateMember($request)
+    {
+
+        $member = Member::with(getPDO(), $request);
+        $member->update();
+        echo 'Member has been updated!';
+    }
+
+    public function deleteMember($request)
+    {
+        $member = Member::create($this->pdo);
+        $member->delete($request['id']);
+        echo 'Member has been deleted!';
     }
 }

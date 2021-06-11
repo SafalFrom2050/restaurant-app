@@ -31,6 +31,9 @@ class ImageService {
         $dir = $this->imageDir;
         $imageTypes = ['jpg','png','jpeg','gif'];
 
+        if (! isset($_FILES['photos'])) {
+            return;
+        }
         $fileNames = array_filter($_FILES['photos']['name']);
 
         // TODO: remove

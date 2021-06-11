@@ -48,8 +48,7 @@ class MenuService {
         }
 
         if ($method === 'delete') {
-            $menu = Menu::create($this->pdo);
-            $menu->delete($request['id']);
+            $this->deleteMenu($request);
         }else if ($method === 'put') {
             $this->updateMenu($request);
         }
@@ -68,6 +67,8 @@ class MenuService {
         foreach ($imageIds as $imageId) {
             MenuImage::with(getPDO(), ['image_id' => $imageId, 'menu_id' => $menuId])->save();
         }
+
+        return $menuId;
     }
 
     public function updateMenu($request)
@@ -94,5 +95,10 @@ class MenuService {
         foreach ($imageIds as $imageId) {
             MenuImage::with(getPDO(), ['image_id' => $imageId, 'menu_id' => $menu->id])->save();
         }
+    }
+
+    public function deleteMenu($request) {
+        $menu = Menu::create($this->pdo);
+        $menu->delete($request['id']);
     }
 }

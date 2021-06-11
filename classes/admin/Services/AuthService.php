@@ -22,23 +22,30 @@ class AuthService {
         session_start();
 
         if (isset($request['submit'], $request['login'])) {
-
-            $user = Member::create(getPDO())->findByUsername($request['username']);
-
-            if (isset($user->id)) {
-                if (password_verify($request['password'], $user->password)) {
-                    $_SESSION['loggedin'] = true;
-                    $_SESSION['user_id'] = $user->id;
-
-                    // Used for csrf protection
-                    setSessionToken();
-                }else {
-                    echo 'Password is invalid';
-                }
-            }else {
-                echo 'Username is invalid!';
+            if ($this->loginUser($request)) {
+                // Used for csrf protection
+                setSessionToken();
             }
         }
+    }
+
+    public function loginUser($request)
+    {
+        $user = Member::create(getPDO())->findByUsername($request['username']);
+
+        if (isset($user->id)) {
+            if (password_verify($request['password'], $user->password)) {
+                $_SESSION['loggedin'] = true;
+                $_SESSION['user_id'] = $user->id;
+
+                return true;
+            }
+            echo 'Password is invalid';
+            return false;
+        }
+
+        echo 'Username is invalid!';
+        return false;
     }
 
     public function isLoggedIn()

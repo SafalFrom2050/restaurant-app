@@ -36,9 +36,7 @@ class BookingService {
         /** Create */
 
         if ($method === 'post') {
-            $booking = Booking::with(getPDO(), $request);
-            $booking->save();
-            echo 'Your booking request has been placed successfully!';
+            $this->createBooking($request);
         }
 
         /** Operations on existing rows */
@@ -48,11 +46,34 @@ class BookingService {
         }
 
         if ($method === 'delete') {
-            $booking = Booking::create($this->pdo);
-            $booking->delete($request['id']);
+            $this->deleteBooking($request);
         }else if ($method === 'put') {
-            $booking = Booking::with(getPDO(), $request);
-            $booking->update();
+            $this->updateBooking($request);
         }
     }
+
+    public function createBooking($request)
+    {
+        $booking = Booking::with(getPDO(), $request);
+        $id = $booking->save();
+        echo 'Your booking request has been placed successfully!';
+
+        return $id;
+    }
+
+    public function updateBooking($request)
+    {
+        $booking = Booking::with(getPDO(), $request);
+        $booking->update();
+        echo 'Booking request has been updated!';
+    }
+
+    public function deleteBooking($request)
+    {
+        $booking = Booking::create($this->pdo);
+        $booking->delete($request['id']);
+        echo 'Booking request has been deleted!';
+    }
+
+
 }

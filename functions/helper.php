@@ -1,5 +1,5 @@
 <?php
-$pdo = new PDO('mysql:dbname=kitchen;host=127.0.0.1', 'student', 'student');
+$pdo = new PDO('mysql:dbname=kitchen;host=v.je', 'v.je', 'v.je');
 
 function loadTemplate($fileName, $templateVars)
 {

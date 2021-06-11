@@ -4,6 +4,7 @@ namespace admin\Services;
 
 
 use Models\Category;
+use Validators\Validator;
 
 class CategoryService {
 
@@ -37,8 +38,7 @@ class CategoryService {
         /** Create category */
 
         if ($method === 'post') {
-            $category = Category::with(getPDO(), $request);
-            $category->save();
+            $this->createCategory($request);
         }
 
         /** Operations on existing rows */
@@ -48,13 +48,47 @@ class CategoryService {
         }
 
         if ($method === 'delete') {
-            $category = Category::create($this->pdo);
-            $category->delete($request['id']);
+            $this->deleteCategory($request);
         }else if ($method === 'put') {
-            $category = Category::with(getPDO(), $request);
-            $category->update();
-        }else if ($method === 'patch') {
-            // TODO: patch logic
+            $this->updateCategory($request);
         }
+    }
+
+    public function createCategory($request)
+    {
+
+        if (! Validator::isNotNull($request['name'])) {
+            echo 'Name is required!';
+            return -1;
+        }
+        if (! Validator::isNotNull($request['slug'])) {
+            echo 'Slug is required!';
+            return -1;
+        }
+
+        $request['slug'] = str_replace(' ', '-', $request['slug']);
+        $request['slug'] = strtolower($request['slug']);
+
+        $category = Category::with(getPDO(), $request);
+        $id = $category->save();
+
+        echo 'Category has been created!';
+        return $id;
+    }
+
+    public function updateCategory($request)
+    {
+        $category = Category::with(getPDO(), $request);
+        $category->update();
+
+        echo 'Category has been updated!';
+    }
+
+    public function deleteCategory($request)
+    {
+        $category = Category::create($this->pdo);
+        $category->delete($request['id']);
+
+        echo 'Category has been deleted!';
     }
 }
